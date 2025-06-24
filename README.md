@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Sistema JASS - Frontend Angular
 
 ![Logo JASS](public/assets/images/Gotita.png)
@@ -613,3 +614,6 @@ La directiva `permission.directive.ts` en `src/app/shared/directives/` permite c
 - `src/environments/environment.production.ts`: Configuración para producción.
 - `src/app/core/utils/constants.ts`: Constantes comunes, como códigos de estado o mensajes.
 
+=======
+# vg-sistemJass-english
+>>>>>>> 11475de8d423aacead69f3c2715c47c96814d342
