@@ -1,57 +1,42 @@
-<<<<<<< HEAD
 # Sistema JASS - Frontend Angular
 
 ![Logo JASS](public/assets/images/Gotita.png)
 
 Sistema integrado para la gestión de Juntas Administradoras de Servicios de Saneamiento (JASS) basado en microservicios.
 
-## 📝 Visión General del Proyecto
-
-Este repositorio contiene el código fuente del frontend para sistemaJass, una aplicación integral diseñada para la gestión de Juntas Administradoras de Servicios de Saneamiento (JASS). La aplicación proporciona una interfaz de usuario robusta y modular, construida con Angular 19 y estilizada con Tailwind CSS 4, permitiendo a los administradores, operadores y clientes interactuar eficientemente con los diversos microservicios del backend.
+## 📝Project Purpose
 
 El objetivo principal es ofrecer una solución escalable y fácil de mantener, que facilite la administración de usuarios, infraestructura, pagos, distribución de agua, inventario, calidad del agua, reclamos y notificaciones.
 
-## 🚀 Tecnologías Utilizadas
+## 🛠️ Setup Instructions (Imperatives)
+1. **Clone** the repository:  
+   `git clone https://github.com/Ronaldinho-cc/vg-sistemJass-english.git`   
+2. **Navigate** into frontend:  
+   `cd ../ms-water-quality`  
+.. **Install** dependencies and **serve** the Angular app:  
+   `npm install`  
+   `ng serve`
+   
+## 🧩 How to Use the App (Advice with “should”)
+- You **should** open `http://localhost:4200` after both backend and frontend are running.  
+- You **should** create a user account to access intefaces the microservices.  
 
-- **Angular 19**: Framework de desarrollo para aplicaciones web, proporcionando una estructura robusta y herramientas para construir SPAs (Single Page Applications).
-- **TypeScript**: Un superset de JavaScript que añade tipado estático, mejorando la calidad y la mantenibilidad del código.
-- **Tailwind CSS 4**: Un framework CSS "utility-first" que permite construir diseños personalizados rápidamente, directamente en el marcado HTML, con clases de utilidad altamente componibles.
-- **SCSS (Sass)**: Preprocesador CSS para escribir estilos más potentes y mantenibles con variables, mixins y funciones anidadas.
-- **RxJS**: Librería para programación reactiva que facilita el manejo de eventos asíncronos y flujos de datos.
+---
+## 🚀 Technologies Used
 
-## 📦 Estructura de Microservicios
+-**Angular 19**: Web application development framework, providing a robust structure and tools for building SPAs (Single Page Applications).
+- **TypeScript**: A JavaScript superset that adds static typing, improving code quality and maintainability.
+- **Tailwind CSS 4**: A utility-first CSS framework that allows you to quickly build custom layouts directly in HTML markup with highly composable utility classes.
+- **SCSS (Sass)**: CSS preprocessor for writing more powerful and maintainable styles with variables, mixins, and nested functions.
+- **RxJS**: A reactive programming library that facilitates the handling of asynchronous events and data flows.
 
-| Microservicio | Descripción | Entidades Principales |
-|---------------|-------------|----------------------|
-| **MS-ORGANIZACIONES** | Gestión de múltiples JASS | Organization, Branch, Members |
-| **MS-USUARIOS-AUTENTICACION** | Autenticación unificada y gestión de usuarios | User, Role, Permission, Session |
-| **MS-INFRAESTRUCTURA** | Administración de cajas y asignaciones | Box, Assignment, Location |
-| **MS-PAGOS-FACTURACION** | Procesamiento de pagos y generación de facturas | Payment, Invoice, Receipt, Transaction |
-| **MS-DISTRIBUCION-AGUA** | Programación de horarios y gestión de incidencias | Schedule, Distribution, Incident |
-| **MS-INVENTARIO-COMPRAS** | Control de productos y compras | Product, Inventory, Purchase, Supplier |
-| **MS-CALIDAD-AGUA** | Monitoreo de calidad del agua | WaterAnalysis, ChlorineLevel, QualityRecord |
-| **MS-RECLAMOS-INCIDENCIAS** | Gestión de reclamos e incidencias | Complaint, Ticket, Resolution |
-| **MS-NOTIFICACIONES** | Sistema de notificaciones multicanal | Notification, Template, Channel |
+## 🎯 Future Plans (Tips and Suggestions)
+- **We should** integrate hosting into a deployment application.
+- **We should** implement administrator roles to control access to content.
+- **We should** schedule training on how to use the system.
 
-## 🏗️ Arquitectura del Frontend
-
-El frontend de sistemaJass sigue una arquitectura modular y escalable, adhiriéndose a las mejores prácticas de Angular para garantizar la mantenibilidad y el rendimiento.
-
-### Diseño Responsivo y Estilización
-
-La aplicación está diseñada bajo el principio Mobile-First, utilizando principalmente Tailwind CSS 4 para construir interfaces responsivas y adaptables a cualquier tamaño de pantalla (dispositivos móviles, tablets, escritorios).
-
-- **Tailwind CSS**: Se utiliza para la mayoría de la estilización, aprovechando sus clases de utilidad para el diseño de componentes, espaciado, tipografía, colores y responsividad (sm:, md:, lg:, etc.).
-
-- **CSS Adicional (SCSS)**: Para estilos más complejos, variables de diseño global, mixins reutilizables y temas específicos, se utilizan archivos SCSS ubicados en `src/assets/styles/`.
-  - `mixins.scss`: Contiene mixins SCSS reutilizables para patrones de estilo comunes.
-  - `themes.scss`: Define las variables para diferentes temas de la aplicación.
-  - `variables.scss`: Almacena variables SCSS globales para colores, fuentes, breakpoints, etc.
-
-- **Consistencia Visual**: Se prioriza la consistencia en el diseño y la experiencia de usuario a través de un sistema de diseño basado en componentes reutilizables y las convenciones de Tailwind.
-
+  
 ### Estructura de Carpetas
-
 La siguiente es una descripción detallada de la estructura de carpetas del proyecto y su propósito:
 
 ```markdown
@@ -422,198 +407,39 @@ La siguiente es una descripción detallada de la estructura de carpetas del proy
 └── 📄 tsconfig.spec.json
 ```
 
-## 🔗 Integración con Microservicios Backend
+## 🧑‍🏫 Contributing (Imperatives & Advice)
+- **Fork** this repo.  
+- **Create** a feature branch:  
+  `git checkout -b feature/water-quality`  
+- **Implement**, **test**, and **lint** your feature locally.  
+- **Open** a Pull Request with a clear summary and description.  
+  > You **should** add “Fixes #\<issue-number\>” in your PR if it's related to an open issue.
+  
 
-El frontend de sistemaJass se comunica con un conjunto de microservicios backend, cada uno responsable de una funcionalidad específica. La estructura de módulos y servicios del frontend refleja esta división, facilitando una clara separación de responsabilidades y una integración eficiente.
+## 🚀 Deployment Requirements (Must & Need To)
+- You **must** set the environment variables:
+- ApiUrl-Microservice=[your_mongodb_uri](http://localhost:8080/api/v2/chlorinerecords)
+- Credentials = Credentials with admin role
+- - You **need to** enable CORS in the Spring configuration for frontend access.  
+- You **must** switch to water function/quality
 
-Aquí se detalla cómo los componentes y servicios del frontend se mapean a los microservicios correspondientes:
+## 💡 Best Practices & Tips
+- You **should**  write in the documentation the changes that apply to the Angular frontend.
+- You **should** document any new REST endpoints in the README or API specification.  
+- You **should** run `npm install ` and `ng serve` to run the system.
 
-### 1. MS-ORGANIZACIONES (Multi-JASS)
-
-- **Descripción**: Gestiona la creación, lectura, actualización y eliminación de información sobre las organizaciones JASS. Es clave para el soporte multi-JASS.
-- **Módulos/Servicios Frontend**:
-  - `src/app/core/models/organization.model.ts`: Define la estructura de datos de una organización.
-  - `src/app/core/services/organization.service.ts`: Servicio encargado de realizar las llamadas HTTP al microservicio de organizaciones.
-  - `src/app/modules/organizations/`: Contiene los componentes (`organization-list`, `organization-detail`, `organization-form`) y la lógica de negocio específica para la gestión de organizaciones.
-  - `src/app/views/super-admin/organizations/`: Vistas de alto nivel para super-administradores para gestionar organizaciones.
-  - `src/app/core/auth/interceptors/organization.interceptor.ts`: Posiblemente añade cabeceras específicas de la organización a las peticiones.
-  - `src/app/core/auth/guards/organization.guard.ts`: Controla el acceso a rutas basadas en la pertenencia a una organización.
-
-### 2. MS-USUARIOS-AUTENTICACION (Unificado)
-
-- **Descripción**: Maneja todo lo relacionado con la autenticación (login, registro, recuperación de contraseña) y la gestión de usuarios y sus roles (administrador, cliente, super-administrador, organización).
-- **Módulos/Servicios Frontend**:
-  - `src/app/core/models/auth.model.ts`, `src/app/core/models/user.model.ts`: Modelos de autenticación y usuarios.
-  - `src/app/core/services/auth.service.ts`: Servicio principal para login, logout, registro y gestión de sesión.
-  - `src/app/core/auth/guards/`: `auth.guard.ts` (general), `admin.guard.ts`, `client.guard.ts`, `organization.guard.ts` (protección de rutas basada en roles).
-  - `src/app/core/auth/interceptors/auth.interceptor.ts`: Añade tokens de autenticación a las peticiones.
-  - `src/app/views/auth/`: Vistas relacionadas con la autenticación (`login`, `register`, `forgot-password`).
-  - `src/app/modules/users/`: Contiene los componentes (`user-list`, `user-form`, `user-profile`) y la lógica de negocio específica para la gestión de usuarios.
-
-### 3. MS-INFRAESTRUCTURA
-
-- **Descripción**: Administra la información de las cajas de agua y sus asignaciones a ubicaciones o usuarios.
-- **Módulos/Servicios Frontend**:
-  - `src/app/core/models/box.model.ts`: Define la estructura de datos de una caja de agua.
-  - `src/app/core/services/box.service.ts`: Servicio para la gestión de cajas.
-  - `src/app/modules/infrastructure/`: Contiene los componentes (`box-list`, `box-form`, `box-assignment`) y la lógica de negocio para la gestión de infraestructura.
-
-### 4. MS-PAGOS-FACTURACION
-
-- **Descripción**: Procesa pagos, genera facturas y recibos, y gestiona transacciones financieras.
-- **Módulos/Servicios Frontend**:
-  - `src/app/core/models/payment.model.ts`: Define la estructura de datos de pagos, facturas y transacciones.
-  - `src/app/core/services/payment.service.ts`: Servicio para la gestión de pagos.
-  - `src/app/modules/payments/`: Contiene los componentes (`payment-list`, `invoice-list`, `payment-form`, `receipt-generator`) y la lógica de negocio para pagos y facturación.
-  - `src/app/views/client/my-payments/`: Vistas para que los clientes puedan ver sus pagos.
-
-### 5. MS-DISTRIBUCION-AGUA
-
-- **Descripción**: Gestiona la programación de horarios de distribución de agua y el registro de incidencias relacionadas.
-- **Módulos/Servicios Frontend**:
-  - `src/app/core/models/distribution.model.ts`: Define la estructura de datos para la distribución y sus incidencias.
-  - `src/app/core/services/distribution.service.ts`: Servicio para la gestión de distribución.
-  - `src/app/modules/distribution/`: Contiene los componentes (`schedule-list`, `schedule-form`, `incident-list`) y la lógica de negocio para la distribución de agua.
-
-### 6. MS-INVENTARIO-COMPRAS
-
-- **Descripción**: Controla el inventario de productos y gestiona las compras a proveedores.
-- **Módulos/Servicios Frontend**:
-  - `src/app/core/models/inventory.model.ts`: Define la estructura de datos para productos, inventario y compras.
-  - `src/app/core/services/inventory.service.ts`: Servicio para la gestión de inventario.
-  - `src/app/modules/inventory/`: Contiene los componentes (`product-list`, `product-form`, `purchase-list`) y la lógica de negocio para inventario y compras.
-
-### 7. MS-CALIDAD-AGUA
-
-- **Descripción**: Monitorea y registra los niveles de calidad del agua, incluyendo análisis y control de cloro.
-- **Módulos/Servicios Frontend**:
-  - `src/app/core/models/water-quality.model.ts`: Define la estructura de datos para análisis y registros de calidad del agua.
-  - `src/app/core/services/water-quality.service.ts`: Servicio para la gestión de calidad del agua.
-  - `src/app/modules/water-quality/`: Contiene los componentes (`analysis-list`, `chlorine-control`, `quality-records`) y la lógica de negocio para la calidad del agua.
-
-### 8. MS-RECLAMOS-INCIDENCIAS
-
-- **Descripción**: Gestiona el ciclo de vida de los reclamos y las incidencias, desde su creación hasta su resolución.
-- **Módulos/Servicios Frontend**:
-  - `src/app/core/models/complaint.model.ts`: Define la estructura de datos para reclamos e incidencias.
-  - `src/app/core/services/complaint.service.ts`: Servicio para la gestión de reclamos.
-  - `src/app/modules/complaints/`: Contiene los componentes (`complaint-list`, `complaint-form`, `incident-tracker`) y la lógica de negocio para reclamos e incidencias.
-
-### 9. MS-NOTIFICACIONES
-
-- **Descripción**: Proporciona un sistema de notificaciones multicanal para enviar alertas y mensajes a usuarios y administradores.
-- **Módulos/Servicios Frontend**:
-  - `src/app/core/models/notification.model.ts`: Define la estructura de datos para notificaciones y plantillas.
-  - `src/app/core/services/notification.service.ts`: Servicio para la gestión de notificaciones.
-  - `src/app/modules/notifications/`: Contiene los componentes (`notification-list`, `notification-sender`, `template-manager`) y la lógica de negocio para notificaciones.
-
-
-## Servicio Base de API
-
-**`src/app/core/services/api.service.ts`**:  
-Actúa como una capa base para todas las llamadas HTTP, encapsulando la lógica común como:
-
-- Configuración de URLs base.
-- Manejo de errores genéricos (en conjunto con `error.interceptor.ts`).
-- Formato de las peticiones.
-
-Todos los servicios específicos de cada microservicio utilizan este `api.service` para realizar sus operaciones.
+- 
+## 📞 Questions & Support
+If you need help:
+- **Open** an issue in this repository.  
+- **Tag** `@ronaldinho.ccencho@vallegrande.edu.pe` for urgent issues.  
+- **Join** our group chat on Discord or Lindkedin for real-time collaboration.
 
 ---
 
-## ⚙️ Estándares de Codificación y Mejores Prácticas
+**Thank you for your contributions!**  
+👍 *Let's build something meaningful together.*
 
-### Angular
 
-#### Modularidad
-Uso extensivo de módulos de características (`src/app/modules/`) con carga perezosa (_lazy-loading_) para mejorar el rendimiento inicial de la aplicación.
 
-#### Componentes
 
-- **Componentes "Smart" (Contenedores)**:  
-  Ubicados en `src/app/views/` o en el nivel superior de los módulos de características. Responsables de:
-  - Lógica de negocio.
-  - Gestión del estado.
-  - Comunicación con servicios.
-
-- **Componentes "Dumb" (Presentacionales)**:  
-  Ubicados en `src/app/shared/components/ui/` o en carpetas `components/` de cada módulo. Responsables solo de la presentación.  
-  - Reciben datos a través de `@Input()`.
-  - Emiten eventos mediante `@Output()`.
-
-#### Servicios
-Ubicados en `src/app/core/services/`, cada servicio debe tener una única responsabilidad (_Single Responsibility Principle - SRP_), encapsulando lógica de negocio y comunicación con el backend.
-
-#### Guards
-`src/app/core/auth/guards/`: Protegen rutas y controlan el acceso según el estado de autenticación y rol del usuario.
-
-#### Interceptors
-`src/app/core/auth/interceptors/`: Interceptan peticiones/respuestas HTTP globalmente. Permiten:
-
-- Añadir cabeceras de autenticación.
-- Manejar errores globalmente (`error.interceptor.ts`).
-- Manipular respuestas.
-
-#### Manejo de Estado
-- Uso de RxJS y Observables para flujos de datos asíncronos y reactivos.
-- Para estados complejos, considerar `NgRx` o `NGRX Signals`.
-
-#### Rutado
-- Rutas principales en `app.routes.ts`.
-- Rutas específicas en archivos `*-routing.module.ts` dentro de cada módulo.
-- Rutado basado en roles con rutas protegidas.
-
----
-
-## Estilo (Tailwind CSS y CSS Adicional)
-
-### Utility-First
-El estilo principal se logra con clases de utilidad de **Tailwind CSS** directamente en HTML.
-
-### Personalización con SCSS
-Para estilos complejos o personalizados:
-
-- Clases adicionales en archivos `.css` o `.scss` de componentes.
-- Estilos globales en `src/assets/styles/`.
-
-### Variables y Temas
-- Variables SCSS en `src/assets/styles/variables.scss` para colores, fuentes, espaciado, etc.
-- Temas personalizados en `src/assets/styles/themes.scss`.
-
-### Diseño Atómico
-Construcción de componentes usando utilidades pequeñas de Tailwind que se combinan para formar componentes más complejos.
-
-### Mobile-First
-Diseño que prioriza la experiencia móvil usando variantes responsivas de Tailwind.
-
----
-
-## Manejo de Errores
-
-**`src/app/core/auth/interceptors/error.interceptor.ts`**  
-Centraliza el manejo de errores HTTP. Funciones clave:
-
-- Intercepta errores de la API.
-- Muestra mensajes al usuario (ej. mediante servicio de notificación o toast).
-- Redirige si es necesario (ej. a login si el token expira).
-
----
-
-## Autenticación y Autorización
-
-- Autenticación: A través de `auth.service.ts` y `auth.interceptor.ts`.
-- Autorización: Mediante Guards como `admin.guard.ts`, `client.guard.ts`, `organization.guard.ts`.
-
-La directiva `permission.directive.ts` en `src/app/shared/directives/` permite controlar la visibilidad de elementos de la UI según permisos del usuario.
-
----
-
-## ⚙️ Configuración del Entorno
-
-- `src/environments/environment.ts`: Configuración para desarrollo.
-- `src/environments/environment.production.ts`: Configuración para producción.
-- `src/app/core/utils/constants.ts`: Constantes comunes, como códigos de estado o mensajes.
-
-=======
-# vg-sistemJass-english
->>>>>>> 11475de8d423aacead69f3c2715c47c96814d342
