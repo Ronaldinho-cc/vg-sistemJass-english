@@ -1,0 +1,144 @@
+<!-- Navegación -->
+<div class="mb-4">
+  <nav class="mb-2 text-sm text-gray-500">
+    <button (click)="goBack()" class="hover:text-gray-700">Dashboard</button>
+    <span class="mx-2">/</span>
+    <button (click)="goBack()" class="hover:text-gray-700">Registros de Cloro</button>
+    <span class="mx-2">/</span>
+    <span class="text-gray-900">Detalle del Registro</span>
+  </nav>
+  <h1 class="text-xl font-bold text-gray-900">Detalle del Registro de Cloro</h1>
+</div>
+
+<!-- Error Alert -->
+<div *ngIf="error" class="mb-4 p-3 bg-red-50 border-l-4 border-red-400 rounded-md">
+  <div class="flex">
+    <div class="flex-shrink-0">
+      <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+      </svg>
+    </div>
+    <div class="ml-3">
+      <p class="text-sm font-medium text-red-800">{{ errorMessage }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="loading" class="p-4 text-center bg-white rounded-lg border border-gray-200 shadow-sm">
+  <div class="h-6 w-6 mx-auto rounded-full border-b-2 border-blue-600 animate-spin"></div>
+  <p class="mt-2 text-gray-500 text-sm">Cargando información...</p>
+</div>
+
+<!-- Detalle del Registro -->
+<div *ngIf="!loading && chlorine" class="bg-white rounded-lg border border-gray-200 shadow-sm max-w-4xl mx-auto">
+  <div class="p-6">
+    <!-- Información del Registro -->
+    <div class="space-y-4">
+      <div class="border-b border-gray-200 pb-4">
+        <h3 class="text-base font-medium text-gray-900">Información del Registro</h3>
+        <p class="mt-1 text-xs text-gray-500">Detalles del registro de cloro.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Organización -->
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-gray-500">Organización</label>
+          <p class="text-sm text-gray-900">{{ chlorine.organizationId }}</p>
+        </div>
+
+        <!-- Código de Registro -->
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-gray-500">Código de Registro</label>
+          <p class="text-sm text-gray-900">{{ chlorine.recordCode }}</p>
+        </div>
+
+        <!-- Punto de Prueba -->
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-gray-500">Punto de Prueba</label>
+          <p class="text-sm text-gray-900">{{ chlorine.testingPointId }}</p>
+        </div>
+
+        <!-- Fecha de Registro -->
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-gray-500">Fecha de Registro</label>
+          <p class="text-sm text-gray-900">{{ formatDate(chlorine.recordDate) }}</p>
+        </div>
+
+        <!-- Nivel de Cloro -->
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-gray-500">Nivel de Cloro</label>
+          <p class="text-sm text-gray-900">{{ chlorine.chlorineLevel }} ppm</p>
+        </div>
+
+        <!-- Registrado por -->
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-gray-500">Registrado por</label>
+          <p class="text-sm text-gray-900">{{ chlorine.recordedByUserId }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado y Acciones -->
+    <div class="mt-6 space-y-4">
+      <div class="border-b border-gray-200 pb-4">
+        <h3 class="text-base font-medium text-gray-900">Estado y Acciones</h3>
+        <p class="mt-1 text-xs text-gray-500">Estado actual del registro y acciones requeridas.</p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Estado del Nivel -->
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-gray-500">Estado del Nivel</label>
+          <span [class]="'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ' + getStatusClass(chlorine.acceptable)">
+            {{ getStatusText(chlorine.acceptable) }}
+          </span>
+        </div>
+
+        <!-- Acción Requerida -->
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-gray-500">Acción Requerida</label>
+          <span [class]="'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ' + getActionClass(chlorine.actionRequired)">
+            {{ getActionText(chlorine.actionRequired) }}
+          </span>
+        </div>
+
+        <!-- Próxima Cloración -->
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-gray-500">Próxima Cloración</label>
+          <p class="text-sm text-gray-900">{{ formatDate(chlorine.nextChlorinationDate) }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Observaciones -->
+    <div class="mt-6 space-y-4">
+      <div class="border-b border-gray-200 pb-4">
+        <h3 class="text-base font-medium text-gray-900">Observaciones</h3>
+        <p class="mt-1 text-xs text-gray-500">Observaciones del registro.</p>
+      </div>
+
+      <div class="space-y-1">
+        <p class="text-sm text-gray-900 whitespace-pre-line">{{ chlorine.observations }}</p>
+      </div>
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="mt-6 pt-4 border-t border-gray-200">
+      <div class="flex justify-end space-x-3">
+        <button
+          type="button"
+          (click)="goBack()"
+          class="px-4 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-blue-500 transition-colors">
+          Volver
+        </button>
+        <button
+          type="button"
+          (click)="editRecord()"
+          class="px-4 py-1.5 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-blue-500 transition-colors">
+          Editar Registro
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

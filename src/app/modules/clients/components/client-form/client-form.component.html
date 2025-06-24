@@ -1,0 +1,389 @@
+
+  <div class="mb-4">
+    <nav class="mb-2 text-sm text-gray-500">
+      <button (click)="cancel()" class="hover:text-gray-700">Dashboard</button>
+      <span class="mx-2">/</span>
+      <button (click)="cancel()" class="hover:text-gray-700">Usuarios</button>
+      <span class="mx-2">/</span>
+      <span class="text-gray-900">
+        {{ isEditMode ? 'Editar Usuario' : 'Nuevo Usuario' }}
+      </span>
+    </nav>
+    <h1 class="text-xl font-bold text-gray-900">
+      {{ isEditMode ? 'Editar Usuario' : 'Agregar Nuevo Usuario' }}
+    </h1>
+  </div>
+
+  <!-- Success Alert -->
+  <div *ngIf="showSuccessAlert" class="mb-4 p-4 bg-green-100 border border-green-400 rounded-md">
+    <div class="flex">
+      <div class="flex-shrink-0">
+        <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm font-medium text-green-800">
+          {{ isEditMode ? 'Usuario actualizado exitosamente' : 'Usuario creado exitosamente' }}
+        </p>
+      </div>
+      <div class="ml-auto pl-3">
+        <div class="-mx-1.5 -my-1.5">
+          <button (click)="showSuccessAlert = false" class="inline-flex bg-green-100 rounded-md p-1.5 text-green-500 hover:bg-green-200">
+            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div *ngIf="showErrorAlert" class="mb-4 p-4 bg-red-100 border border-red-400 rounded-md">
+    <div class="flex">
+      <div class="flex-shrink-0">
+        <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm font-medium text-red-800">
+          Por favor, completa todos los campos requeridos correctamente
+        </p>
+      </div>
+      <div class="ml-auto pl-3">
+        <div class="-mx-1.5 -my-1.5">
+          <button (click)="showErrorAlert = false" class="inline-flex bg-red-100 rounded-md p-1.5 text-red-500 hover:bg-red-200">
+            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="p-6 text-center bg-white rounded-lg border border-gray-200 shadow-sm">
+    <div class="h-6 w-6 mx-auto rounded-full border-b-2 border-blue-600 animate-spin"></div>
+    <p class="mt-2 text-gray-500 text-sm">Cargando...</p>
+  </div>
+
+  <!-- Form con altura controlada -->
+  <div *ngIf="!loading" class="bg-white rounded-lg border border-gray-200 shadow-sm max-h-[calc(100vh-120px)] overflow-y-auto">
+    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="p-4 space-y-4">
+
+      <!-- Información Personal - Grid más amplio -->
+      <div class="pb-4 border-b border-gray-200">
+        <h3 class="mb-3 text-base font-medium text-gray-900">Información Personal</h3>
+
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <!-- Sucursal -->
+          <div class="lg:col-span-2">
+            <label for="branchOfficeId" class="block mb-1 text-sm font-medium text-gray-700">
+              Sucursal *
+            </label>
+            <input
+              id="branchOfficeId"
+              type="text"
+              formControlName="branchOfficeId"
+              class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              [class.border-red-500]="isFieldInvalid('branchOfficeId')"
+              placeholder="Sucursal Central Lima">
+            <p *ngIf="isFieldInvalid('branchOfficeId')" class="mt-1 text-xs text-red-600">
+              {{ getFieldError('branchOfficeId') }}
+            </p>
+          </div>
+
+          <!-- Tipo de Documento -->
+          <div>
+            <label for="documentType" class="block mb-1 text-sm font-medium text-gray-700">
+              Tipo de Documento *
+            </label>
+            <select
+              id="documentType"
+              formControlName="documentType"
+              (change)="onDocumentTypeChange()"
+              class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              [class.border-red-500]="isFieldInvalid('documentType')">
+              <option *ngFor="let type of documentTypes" [value]="type">
+                {{ type }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Número de Documento -->
+          <div>
+            <label for="documentNumber" class="block mb-1 text-sm font-medium text-gray-700">
+              Número de Documento *
+            </label>
+            <input
+              id="documentNumber"
+              type="text"
+              formControlName="documentNumber"
+              (input)="onDocumentNumberInput($event)"
+              class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              [class.border-red-500]="isFieldInvalid('documentNumber')"
+              [placeholder]="getDocumentPlaceholder()"
+              [maxlength]="getDocumentMaxLength()">
+            <p *ngIf="isFieldInvalid('documentNumber')" class="mt-1 text-xs text-red-600">
+              {{ getFieldError('documentNumber') }}
+            </p>
+          </div>
+
+          <!-- Nombres -->
+          <div>
+            <label for="firstName" class="block mb-1 text-sm font-medium text-gray-700">
+              Nombres *
+            </label>
+            <input
+              id="firstName"
+              type="text"
+              formControlName="firstName"
+              (input)="onNameInput($event, 'firstName')"
+              class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              [class.border-red-500]="isFieldInvalid('firstName')"
+              placeholder="Juan Carlos">
+            <p *ngIf="isFieldInvalid('firstName')" class="mt-1 text-xs text-red-600">
+              {{ getFieldError('firstName') }}
+            </p>
+          </div>
+
+          <!-- Apellidos -->
+          <div>
+            <label for="lastName" class="block mb-1 text-sm font-medium text-gray-700">
+              Apellidos *
+            </label>
+            <input
+              id="lastName"
+              type="text"
+              formControlName="lastName"
+              (input)="onNameInput($event, 'lastName')"
+              class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              [class.border-red-500]="isFieldInvalid('lastName')"
+              placeholder="Pérez García">
+            <p *ngIf="isFieldInvalid('lastName')" class="mt-1 text-xs text-red-600">
+              {{ getFieldError('lastName') }}
+            </p>
+          </div>
+
+          <!-- Teléfono -->
+          <div>
+            <label for="phone" class="block mb-1 text-sm font-medium text-gray-700">
+              Teléfono *
+            </label>
+            <input
+              id="phone"
+              type="text"
+              formControlName="phone"
+              (input)="onPhoneInput($event)"
+              class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              [class.border-red-500]="isFieldInvalid('phone')"
+              placeholder="987654321"
+              maxlength="9">
+            <p *ngIf="isFieldInvalid('phone')" class="mt-1 text-xs text-red-600">
+              {{ getFieldError('phone') }}
+            </p>
+          </div>
+
+          <!-- Email -->
+          <div class="lg:col-span-2">
+            <label for="email" class="block mb-1 text-sm font-medium text-gray-700">
+              Email *
+            </label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              [class.border-red-500]="isFieldInvalid('email')"
+              placeholder="juan.perez@gmail.com">
+            <p *ngIf="isFieldInvalid('email')" class="mt-1 text-xs text-red-600">
+              {{ getFieldError('email') }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dirección - Grid horizontal -->
+      <div class="pb-4 border-b border-gray-200" formGroupName="address">
+        <h3 class="mb-3 text-base font-medium text-gray-900">Dirección</h3>
+
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <!-- Localidad -->
+          <div>
+            <label for="localityName" class="block mb-1 text-sm font-medium text-gray-700">
+              Localidad/Sector *
+            </label>
+            <input
+              id="localityName"
+              type="text"
+              formControlName="localityName"
+              class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              [class.border-red-500]="isNestedFieldInvalid('address', 'localityName')"
+              placeholder="San Juan de Miraflores">
+            <p *ngIf="isNestedFieldInvalid('address', 'localityName')" class="mt-1 text-xs text-red-600">
+              Este campo es requerido
+            </p>
+          </div>
+
+          <!-- Calle -->
+          <div>
+            <label for="streetName" class="block mb-1 text-sm font-medium text-gray-700">
+              Calle/Avenida *
+            </label>
+            <input
+              id="streetName"
+              type="text"
+              formControlName="streetName"
+              class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              [class.border-red-500]="isNestedFieldInvalid('address', 'streetName')"
+              placeholder="Av. Los Álamos 123">
+            <p *ngIf="isNestedFieldInvalid('address', 'streetName')" class="mt-1 text-xs text-red-600">
+              Este campo es requerido
+            </p>
+          </div>
+
+          <!-- Detalle -->
+          <div class="lg:col-span-2">
+            <label for="detail" class="block mb-1 text-sm font-medium text-gray-700">
+              Detalle Adicional
+            </label>
+            <input
+              id="detail"
+              type="text"
+              formControlName="detail"
+              class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Dpto. 101, Edificio Torre Azul">
+          </div>
+        </div>
+      </div>
+
+      <!-- Configuración y Cajas de Agua en una fila -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Configuración -->
+        <div class="pb-4 border-b border-gray-200 lg:border-b-0 lg:border-r lg:pr-6">
+          <h3 class="mb-3 text-base font-medium text-gray-900">Configuración</h3>
+
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+
+<div *ngIf="isEditMode">
+     <label for="status" class="block mb-1 text-sm font-medium text-gray-700">
+          Estado *
+     </label>
+     <select id="status" [disabled]="true"
+          class="block w-full px-3 py-2 text-sm border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed focus:outline-none">
+          <option *ngFor="let status of statuses"  [disabled]="true" [value]="status">
+               {{ status === 'ACTIVE' ? 'Activo' : 'Inactivo' }}
+          </option>
+     </select>
+</div>
+<!-- ...existing code... -->
+          </div>
+        </div>
+
+        <!-- Cajas de Agua -->
+        <div class="lg:pl-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-base font-medium text-gray-900">Cajas de Agua</h3>
+            <button
+              type="button"
+              (click)="addWaterBox()"
+              class="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-600 bg-blue-100 border border-transparent rounded hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              <svg class="h-3 w-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              Agregar
+            </button>
+          </div>
+
+          <!-- Contenedor con altura máxima y scroll -->
+          <div class="max-h-48 overflow-y-auto">
+            <div formArrayName="waterBoxes" class="space-y-2">
+              <div
+                *ngFor="let waterBox of waterBoxesArray.controls; let i = index"
+                [formGroupName]="i"
+                class="p-3 bg-gray-50 border border-gray-200 rounded">
+
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="text-xs font-medium text-gray-700">Caja #{{ i + 1 }}</h4>
+                  <button
+                    type="button"
+                    (click)="removeWaterBox(i)"
+                    class="text-red-600 hover:text-red-800">
+                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                  <div>
+                    <label class="block mb-1 text-xs font-medium text-gray-700">ID *</label>
+                    <input
+                      type="text"
+                      formControlName="boxId"
+                      class="block w-full px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="5678">
+                  </div>
+
+                  <div>
+                    <label class="block mb-1 text-xs font-medium text-gray-700">Código *</label>
+                    <input
+                      type="text"
+                      formControlName="code"
+                      class="block w-full px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="CAJA-2024-001">
+                  </div>
+
+                  <div>
+                    <label class="block mb-1 text-xs font-medium text-gray-700">Tipo *</label>
+                    <select
+                      formControlName="type"
+                      class="block w-full px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                      <option *ngFor="let type of boxTypes" [value]="type">
+                        {{ type }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empty state compacto -->
+            <div
+              *ngIf="waterBoxesArray.length === 0"
+              class="py-4 text-center border-2 border-dashed border-gray-300 rounded">
+              <svg class="h-8 w-8 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+              <p class="mt-1 text-xs text-gray-500">No hay cajas de agua</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botones de Acción fijos en la parte inferior -->
+      <div class="flex flex-col-reverse gap-2 pt-4 border-t border-gray-200 sm:flex-row sm:items-center sm:justify-end">
+        <button
+          type="button"
+          (click)="cancel()"
+          class="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto">
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          [disabled]="submitting || clientForm.invalid"
+          class="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto">
+          <div
+            *ngIf="submitting"
+            class="h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin -ml-1">
+          </div>
+          {{ submitting ? 'Guardando...' : (isEditMode ? 'Actualizar Usuario' : 'Crear Usuario') }}
+        </button>
+      </div>
+    </form>
+  </div>
