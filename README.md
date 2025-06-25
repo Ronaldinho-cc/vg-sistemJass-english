@@ -1,4 +1,4 @@
-# Systen JASS - Frontend Angular
+# System JASS - Frontend Angular
 
 ![Logo JASS](public/assets/images/Gotita.png)
 
