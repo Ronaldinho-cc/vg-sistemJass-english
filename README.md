@@ -1,12 +1,12 @@
-# Sistema JASS - Frontend Angular
+# Systen JASS - Frontend Angular
 
 ![Logo JASS](public/assets/images/Gotita.png)
 
-Sistema integrado para la gestión de Juntas Administradoras de Servicios de Saneamiento (JASS) basado en microservicios.
+Integrated system for managing Sanitation Services Administration Boards (JASS) based on microservices.
 
 ## 📝Project Purpose
 
-El objetivo principal es ofrecer una solución escalable y fácil de mantener, que facilite la administración de usuarios, infraestructura, pagos, distribución de agua, inventario, calidad del agua, reclamos y notificaciones.
+The main objective is to offer a scalable and easy-to-maintain solution that facilitates the management of users, infrastructure, payments, water distribution, inventory, water quality, complaints, and notifications.
 
 ## 🛠️ Setup Instructions (Imperatives)
 1. **Clone** the repository:  
@@ -36,8 +36,8 @@ El objetivo principal es ofrecer una solución escalable y fácil de mantener, q
 - **We should** schedule training on how to use the system.
 
   
-### Estructura de Carpetas
-La siguiente es una descripción detallada de la estructura de carpetas del proyecto y su propósito:
+### Folder Structure
+The project's folder structure and purpose are detailed below:
 
 ```markdown
 . 📂 sistemaJass
